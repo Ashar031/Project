@@ -1,0 +1,36 @@
+# Query: quiz.as
+# ContextLines: 1
+
+No Results
+INCLUDE Irvine32.inc   ; Include Irvine32 library
+
+.data
+    num1 DWORD 10      ; First number
+    num2 DWORD 20      ; Second number
+    result DWORD ?     ; Storage for the result
+
+    message BYTE "The result is: ", 0 ; Null-terminated string for display
+
+.code
+main PROC
+    ; Load the first number into EAX
+    mov eax, num1
+
+    ; Add the second number
+    add eax, num2
+
+    ; Store the result
+    mov result, eax
+
+    ; Display the result
+    mov edx, OFFSET message  ; Load address of message
+    call WriteString         ; Display the message
+
+    mov eax, result          ; Load the result
+    call WriteDec            ; Display the result as a decimal number
+
+    call Crlf                ; Move to the next line
+
+    exit                     ; Exit the program
+main ENDP
+END main
